@@ -1,3 +1,5 @@
+# Board
+
 ## Smarted canvas
 
 I will be integrting it into the ckeditor as a plugin, but you can have it now by the way.

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <html>
 
 <head>
@@ -60,3 +61,62 @@
 </body>
 
 </html>
+=======
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>SMARTED NOTE</title>
+		<link rel="stylesheet" type="text/css" href="adapters/font-awesome-4.5.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="adapters/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="adapters/literallycanvas.css">
+		<link rel="stylesheet" type="text/css" href="main.css">
+		<script src="adapters/react.min.js"></script>
+		<script src="adapters/literallycanvas.min.js"></script>
+		<script src="adapters/jquery-2.1.4.min.js"></script>
+		<script src="adapters/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<ul class="nav nav-tabs" role="tablist">
+		        <li><a href="#contact_01" data-toggle="tab">SECTION 1</a><span><i class="fa fa-close"></i></span>
+		        </li>
+		        <li><a href="#contact_02" data-toggle="tab">SECTION 2</a><span><i class="fa fa-close"></i></span> 
+		        </li>
+		        <li><a href="#contact_03" data-toggle="tab">SECTION 3</a><span><i class="fa fa-close"></i></span> 
+		        </li>
+		        <li style="background-color: transparent; width: 50px;"><a href="#" class="add-contact" style="background-color: transparent; background: transparent;"><i class="fa fa-plus"></i></a>
+		        </li>
+		    </ul>
+
+			<div class="tab-content">
+				 <div id="contact_01" class="tab-pane fade in active">
+				    <!-- where the widget goes. you can do CSS to it. -->
+				 	<div class="literally"></div>
+
+				    <!-- kick it off -->
+				 </div>
+				<div id="contact_02" class="tab-pane fade">
+				    <div class="literally"></div>
+				</div>
+				 <div id="contact_03" class="tab-pane fade">
+				    <div class="literally"></div>
+				 </div>
+			</div>
+		</div>
+
+			<script>
+		        
+		        LC.init(
+		            document.getElementsByClassName('literally')[0]
+		        );
+
+		        /* or if you just love jQuery,
+		            $('.literally').literallycanvas({imageURLPrefix: '/static/img'})
+		            or
+		            LC.init($('.literally').get(0), {imageURLPrefix: '/static/img'})
+		        */
+		    </script>
+		<script src="main.js"></script>
+	</body>
+</html>
+>>>>>>> 2b8c8f53bf2daa28663cb4c900596840681642ba
