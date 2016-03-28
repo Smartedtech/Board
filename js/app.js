@@ -3,7 +3,7 @@
     img.src = 'img/screenshot.png' //this will use smarted image as the background later 
 
     var lc = LC.init(document.getElementsByClassName('literally')[0], {
-        watermarkImage: img,
+        // watermarkImage: img,
     });
     var tools = [{
         name: 'pencil',
@@ -154,27 +154,18 @@
         imageFile.click();
     }
 
-    //yet to finished
-    imageFile.addEventListener('change', function(file) {
-        var img = new Image();
-        img.src = 'img/pencil.png';
-        lc.saveShape(LC.createShape('Image', {
-            x: 100,
-            y: 100,
-            image: img
-        }));
-        // 	console.log(document.getElementById('uploadImage'));
-        // 	var reader = new FileReader();
-        //     reader.onload = function(e) {
-        //         var img = new Image();
-        //         img.src = e.target.result;
-        //         lc.saveShape(LC.createShape('Image', {
-        //             x: 100,
-        //             y: 100,
-        //             image: img
-        //         }))
-        //     };
-        //     reader.readAsDataURL(file);
+    imageFile.addEventListener('change', function() {
+        selectedFile = imageFile.files[0];
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var img = new Image();
+            img.src = e.target.result;
+            lc.saveShape(LC.createShape('Image', {
+                image: img
+            }));
+
+        };
+        reader.readAsDataURL(selectedFile);
 
     });
 
@@ -183,8 +174,8 @@
     }
     activateTool(tools, tools[0]);
     activateTool(strokeWidths, strokeWidths[0]);
-var localStorageKey = 'drawing'
-lc.on('drawingChange', function() {
-      localStorage.setItem(localStorageKey, JSON.stringify(lc.getSnapshot()));
+    var localStorageKey = 'drawing'
+    lc.on('drawingChange', function() {
+        localStorage.setItem(localStorageKey, JSON.stringify(lc.getSnapshot()));
     });
 })();
