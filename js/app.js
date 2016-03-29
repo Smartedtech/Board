@@ -2,7 +2,7 @@
     var img = new Image()
     img.src = 'img/screenshot.png' //this will use smarted image as the background later 
 
-    var lc = LC.init(document.getElementsByClassName('literally')[0], {
+    var lc = LC.init(document.getElementById('literally'), {
         // watermarkImage: img,
     });
     var tools = [{
@@ -121,9 +121,10 @@
     var zoomIn = document.getElementById('tool-zoom-in');
     var zoomOut = document.getElementById('tool-zoom-out');
     var setImageSize = document.getElementById('change-img-size');
+    var literallyEditor = document.getElementById('literallyEditor');
+    
     clearCanvas.addEventListener('click', clearCanvasContent);
     uploadImg.addEventListener('click', uploadImage);
-    // setImageSize
 
     undo.addEventListener('click', function() {
         lc.undo();
@@ -161,13 +162,68 @@
             var img = new Image();
             img.src = e.target.result;
             lc.saveShape(LC.createShape('Image', {
-                image: img
+                image: img,
+                scale: 0.5
             }));
 
         };
         reader.readAsDataURL(selectedFile);
 
     });
+
+    function openNewTab() {
+        console.log("new tab");
+        var tabName = prompt("Enter new tab name");
+        //check for cancel or null name
+        if (tabName == null || !tabName) return;
+        console.log(tabName);
+        appendNewTab(tabName);
+        lc.teardown();
+        lc = null;
+        literallyEditor.innerHTML = '<div id="' + tabName + '"></div>';
+        lc = LC.init(document.getElementById(tabName), {
+            // watermarkImage: img,
+        });
+        activateTool(tools, tools[0]);
+        activateTool(strokeWidths, strokeWidths[0]);
+
+    }
+    var newTab = document.getElementById('newTab');
+    newTab.addEventListener('click', openNewTab);
+
+    var tabElement = document.getElementById('tabDiv');
+
+    function appendNewTab(name) {
+        var li = document.createElement('li');
+        var link = document.createElement('a');
+        var removeLinkSpan = document.createElement('span');
+        var removeLinkI = document.createElement('i');
+        li.className = name;
+        link.innerHTML = name;
+        link.className = name;
+        li.appendChild(link);
+        removeLinkI.className = 'fa fa-close';
+        removeLinkSpan.appendChild(removeLinkI);
+        li.appendChild(removeLinkSpan);
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            // loadTabData(name);
+            console.log("loaded");
+        });
+        removeLinkI.addEventListener('click', function(e) {
+            e.preventDefault();
+            closeTab(name);
+            console.log("remove link");
+        });
+
+        tabElement.appendChild(li);
+    }
+
+    function closeTab(tab) {
+        alert("close : " + tab);
+        var tabLi = document.getElementsByClassName(tab);
+        tabLi[0].parentNode.removeChild(tabLi);
+    }
 
     function clearCanvasContent() {
         lc.clear();
